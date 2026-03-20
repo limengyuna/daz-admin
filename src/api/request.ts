@@ -3,10 +3,11 @@ import type { AxiosInstance, AxiosRequestConfig, InternalAxiosRequestConfig, Axi
 import { ElMessage } from 'element-plus'
 import router from '@/router'
 import type { ApiResponse } from '@/types/api'
+import { API_BASE } from '@/config'
 
 // 创建 Axios 实例
 const service: AxiosInstance = axios.create({
-  baseURL: '/api',
+  baseURL: API_BASE,
   timeout: 10000
 })
 
