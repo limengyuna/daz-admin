@@ -1,0 +1,279 @@
+/* ========== CSS 变量 - 设计令牌 ========== */
+:root {
+  /* 主色调 */
+  --color-primary: #4361ee;
+  --color-primary-light: #6980f5;
+  --color-primary-pale: rgba(67, 97, 238, 0.08);
+  /* 功能色 */
+  --color-success: #2ec4b6;
+  --color-warning: #f4a261;
+  --color-danger: #e63946;
+  --color-info: #8d99ae;
+  /* 中性色 */
+  --color-text: #1d2939;
+  --color-text-secondary: #667085;
+  --color-text-muted: #98a2b3;
+  --color-border: #eaecf0;
+  --color-bg: #f5f6fa;
+  --color-surface: #ffffff;
+  /* 侧边栏 */
+  --sidebar-bg: #111827;
+  --sidebar-active: rgba(67, 97, 238, 0.15);
+  /* 字体 */
+  --font-display: 'DM Sans', 'Noto Sans SC', sans-serif;
+  --font-body: 'Noto Sans SC', 'DM Sans', sans-serif;
+  /* 圆角 */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  /* 阴影 */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ========== 全局重置 ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #app {
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-body);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========== 布局样式 ========== */
+.layout-container {
+  height: 100vh;
+
+  .layout-aside {
+    background: var(--sidebar-bg);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    border-right: 1px solid rgba(255, 255, 255, 0.04);
+    position: relative;
+
+    /* 侧边栏微妙噪点纹理 */
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    & > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-container {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+      .logo-icon {
+        flex-shrink: 0;
+      }
+
+      .logo-title {
+        font-family: var(--font-display);
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        margin-left: 10px;
+        white-space: nowrap;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    .el-menu {
+      border-right: none;
+
+      .el-menu-item {
+        height: 44px;
+        line-height: 44px;
+        margin: 3px 10px;
+        border-radius: var(--radius-sm);
+        font-size: 13px;
+        transition: all 0.2s;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        &.is-active {
+          background: var(--sidebar-active) !important;
+          color: var(--color-primary-light) !important;
+        }
+      }
+    }
+  }
+
+  .layout-header {
+    height: 60px;
+    background: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--color-border);
+    z-index: 10;
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-right {
+      .admin-info {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        outline: none;
+        padding: 4px 8px;
+        border-radius: var(--radius-sm);
+        transition: background 0.2s;
+
+        &:hover {
+          background: var(--color-primary-pale);
+        }
+
+        .admin-name {
+          font-size: 13px;
+          font-weight: 500;
+          color: var(--color-text);
+        }
+      }
+    }
+  }
+
+  .layout-main {
+    background: var(--color-bg);
+    padding: 18px 20px;
+    overflow-y: auto;
+  }
+}
+
+/* ========== 通用组件样式 ========== */
+
+/* 页面卡片 */
+.page-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+}
+
+/* 搜索区域 */
+.search-bar {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* 表格操作列 */
+.table-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* 分页器 */
+.pagination-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* ========== Element Plus 全局覆盖 ========== */
+
+/* 表格行间距 */
+.el-table {
+  --el-table-header-bg-color: #fafbfc;
+  --el-table-row-hover-bg-color: var(--color-primary-pale);
+
+  th.el-table__cell {
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-text-secondary) !important;
+  }
+}
+
+/* Tag 圆角 */
+.el-tag {
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* 按钮微调 */
+.el-button {
+  font-family: var(--font-body);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+/* 输入框微调 */
+.el-input__wrapper {
+  border-radius: var(--radius-sm) !important;
+}
+
+/* 对话框圆角 */
+.el-dialog {
+  border-radius: var(--radius-lg) !important;
+}
+
+/* ========== 页面进入动画 ========== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-card,
+.stat-card,
+.stat-grid,
+.chart-row {
+  animation: fadeInUp 0.4s ease both;
+}
+
+/* stagger 效果 */
+.stat-grid { animation-delay: 0s; }
+.chart-row { animation-delay: 0.1s; }
+.quick-grid { animation-delay: 0.15s; }
+
+/* ========== 滚动条美化 ========== */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d0d5dd;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
