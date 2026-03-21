@@ -25,3 +25,11 @@ export function restoreMoment(momentId: number) {
     method: 'put'
   })
 }
+
+// 获取动态详情
+export function getMomentDetail(momentId: number) {
+  return request<MomentItem>({
+    url: `/admin/moments/${momentId}`,
+    method: 'get'
+  })
+}

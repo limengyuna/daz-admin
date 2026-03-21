@@ -25,3 +25,11 @@ export function restoreActivity(activityId: number) {
     method: 'put'
   })
 }
+
+// 获取活动详情
+export function getActivityDetail(activityId: number) {
+  return request<ActivityItem>({
+    url: `/admin/activities/${activityId}`,
+    method: 'get'
+  })
+}

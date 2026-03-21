@@ -90,27 +90,34 @@ export interface ActivityQueryParams {
   size?: number
   keyword?: string
   status?: number
+  userId?: number
 }
 
 /** 活动列表项 */
 export interface ActivityItem {
   activityId: number
+  initiatorId: number
+  categoryIds: string
   title: string
   description: string
   images: string
   locationName: string
   locationAddress: string
-  categoryIds: string
+  latitude: number | null
+  longitude: number | null
   startTime: string
   endTime: string
+  registrationEndTime: string | null
   maxParticipants: number
   paymentType: number
   status: number
   createdAt: string
-  initiatorId: number
+  updatedAt: string | null
   initiatorNickname: string
   initiatorAvatar: string
+  initiatorCreditScore: number | null
   currentParticipants: number
+  participants: any[] | null
 }
 
 // ========== 动态管理 ==========
@@ -121,21 +128,25 @@ export interface MomentQueryParams {
   size?: number
   keyword?: string
   status?: number
+  userId?: number
 }
 
 /** 动态列表项 */
 export interface MomentItem {
   momentId: number
+  userId: number
   content: string
   images: string
   locationName: string
+  locationAddress: string
   visibility: number
   likeCount: number
   commentCount: number
   viewCount: number
   status: number
   createdAt: string
-  userId: number
-  nickname: string
-  avatarUrl: string
+  userNickname: string
+  userAvatar: string
+  userCreditScore: number
+  liked: boolean | null
 }
